@@ -1,31 +1,24 @@
 import React,{Component} from 'react';
-import { StyleSheet, Text, View,Button } from 'react-native';
+import { StyleSheet, Text, View,Button,AppRegistry } from 'react-native';
+import {SkypeIndicator} from "react-native-indicators"
 
-class HomeScreen extends Component {
+class DepartureScreen extends Component {
     constructor(props){
         super(props);
-        this.state={
-            location:this.props.navigation.state.params.location,
-            isLoad:false
-        }
+        
     }
 
+    
     render(){
-        
-            
+  
             return (
                 <View style={styles.container}>
-                
-                    <Text>현재 위치 : {this.state.location.name}</Text>
-                    <Text>반납하시겠습니까??</Text>
-                    
-
-                    <Button title="YES"/>
-                    
-                    <Button title="NO"/>
-                </View>
-            );
-        
+                    <SkypeIndicator color="black"/>
+                <Text>근처 자전거의 NFC를 태그해주세요!</Text>
+                <Button title="Start" onPress={()=>this.props.navigation.navigate("Running")}/>
+            </View>
+        );
+    
     }
 }
 
@@ -38,4 +31,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default DepartureScreen;

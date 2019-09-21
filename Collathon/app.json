@@ -27,6 +27,7 @@
       "supportsTablet": true
     },
     "android":{
+      "package": "com.google.android.geo.API_KEY",
       "config": { "googleMaps": { "apiKey": "AIzaSyBgEzBTBpggPy6ouKjcIaKkNHlyAuKZ59Q" } }
 
     }

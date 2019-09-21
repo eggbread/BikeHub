@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, Button, ImageBackground,TouchableOpacity } from "react-native";
 import axios from "axios";
-import MapView from "react-native-maps";
+import MapView,{Marker} from "react-native-maps";
 
 class MapScreen extends Component {
   constructor(props) {
@@ -13,25 +13,42 @@ class MapScreen extends Component {
 
   render() {
     return (
-    <View style={styles.container}>
+    
         <MapView
             initialRegion={{
-                // latitude:this.state.location.latitude,
-                // longitude:this.state.location.longitude,
-                latitude:37.78825,
-                longitude:-122.4324,
+                latitude:this.state.location.latitude,
+                longitude:this.state.location.longitude,
+                // latitude:37.78825,
+                // longitude:-122.4324,
                 latitudeDelta:0.0922,
                 longitudeDelta:0.0421
                 
             }}
+            // initialRegion={{
+            //   latitude: 37.78825,
+            //   longitude: -122.4324,
+            //   latitudeDelta: 0.0922,
+            //   longitudeDelta: 0.0421,
+            // }}
             style={{
-              width:1,
-              height:1
+              flex:1
             }}
-            // showsUserLocation={true}
-        />
+            showsUserLocation={true}
+        >
+          
 
-    </View>
+          <Marker
+          coordinate={{
+            latitude:this.state.location.latitude,
+            longitude:this.state.location.longitude,
+            
+          }}
+          onPress={()=>this.props.navigation.navigate("Departure",{location:this.state.location})}
+          />
+          
+        </MapView>
+
+    
     );
   }
 }

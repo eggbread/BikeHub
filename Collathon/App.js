@@ -5,13 +5,19 @@ import HomeScreen from './src/screens/HomeScreen'
 import ArriveScreen from "./src/screens/ArriveScreen"
 import DepartureScreen from "./src/screens/DepartureScreen"
 import MapScreen from "./src/screens/MapScreen"
+import LoginScreen from "./src/screens/LoginScreen"
+import SignupScreen from "./src/screens/SignupScreen"
+import RunningScreen from "./src/screens/RunningScreen"
 
 const navigator = createStackNavigator(
   {
     Home:HomeScreen,
     Arrive:ArriveScreen,
     Departure:DepartureScreen,
-    Map:MapScreen
+    Map:MapScreen,
+    Login:LoginScreen,
+    Signup:SignupScreen,
+    Running:RunningScreen
   },
   {
     initialRouteName:'Home',
