@@ -1,7 +1,7 @@
 package host.exp.exponent;
 
 import com.facebook.react.ReactPackage;
-
+import org.reactnative.camera.RNCameraPackage;
 import org.unimodules.core.interfaces.Package;
 
 import java.util.Arrays;
@@ -26,7 +26,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
     return Arrays.<ReactPackage>asList(
         // Add your own packages here!
         // TODO: add native modules!
-
+        new RNCameraPackage()
         // Needed for `react-native link`
         // new MainReactPackage()
     );

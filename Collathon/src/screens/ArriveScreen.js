@@ -1,89 +1,161 @@
-import React,{Component} from 'react';
-import { StyleSheet, Text, View,Button } from 'react-native';
-import {SkypeIndicator} from "react-native-indicators"
-import axios from "axios"
-import {BallIndicator} from "react-native-indicators"
-
+import React, { Component } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { SkypeIndicator } from "react-native-indicators";
+import axios from "axios";
+import { DotIndicator } from "../components/indicators";
+import { Button } from "react-native-elements";
+import MapView, { Marker } from "react-native-maps";
+import moment from "moment";
 
 class ArriveScreen extends Component {
-    constructor(props){
-        super(props);
-        this.state={
-            location:this.props.navigation.state.params.location,
-            isLoad:false
-        }
-    }
-    componentDidMount() {
-        
-        navigator.geolocation.getCurrentPosition(async position => {
-          // console.log(position)
-            
-          var geocode =
-            "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
-            position.coords.latitude +
-            "," +
-            position.coords.longitude +
-            "&key=AIzaSyBgEzBTBpggPy6ouKjcIaKkNHlyAuKZ59Q";
-    
+  constructor(props) {
+    super(props);
+    this.state = {
+      location: this.props.navigation.state.params.location,
+      isLoad: false,
+    time:moment().format("LTS")
+    };
+  }
 
+  componentWillMount() {
+    navigator.geolocation.getCurrentPosition(async position => {
+      // console.log(position)
 
-          axios.post(geocode, {}).then(myJSONResult => {
-            // console.log(myJSONResult.data.results)
-            if (myJSONResult.status === 200) {
-                myJSONResult=myJSONResult.data
-                console.log(myJSONResult.results[0].formatted_address)
-                this.setState({
-                    location:{
-                        name:myJSONResult.results[0].formatted_address,
-                        latitude:position.coords.latitude,
-                        longitude:position.coords.longitude
-                    },
-                    isLoad:true
-                })
-            
-            }
+      var geocode =
+        "https://maps.googleapis.com/maps/api/geocode/json?latlng=" +
+        position.coords.latitude +
+        "," +
+        position.coords.longitude +
+        "&key=AIzaSyBgEzBTBpggPy6ouKjcIaKkNHlyAuKZ59Q";
+
+      axios.post(geocode, {}).then(myJSONResult => {
+        // console.log(myJSONResult.data.results)
+        if (myJSONResult.status === 200) {
+          myJSONResult = myJSONResult.data;
+          console.log(myJSONResult.results[0].formatted_address);
+          this.setState({
+            location: {
+              name: myJSONResult.results[0].formatted_address,
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude
+            },
+            isLoad: true
           });
-          console.log("setup");
-          console.log(this.state.location)
-        });
-    }
-    render(){
-        if(!this.state.isLoad){
-            return(
-                <View>
-                    <BallIndicator
-                    color="black"
-                    />
-                </View>
-            )
-        }else{
-
-            
-            return (
-                <View style={styles.container}>
-                
-                    <Text>현재 위치 : {this.state.location.name}</Text>
-                    <Text>반납하시겠습니까??</Text>
-                    
-
-                    <Button title="YES"/>
-                    
-                    <Button title="NO" onPress={()=>this.props.navigation.navigate("Running")}/>
-                </View>
-            );
         }
-        
+      });
+      console.log("setup");
+      console.log(this.state.location);
+      setInterval(()=>{
+        this.setState({
+          time:moment().format("LTS")
+        })
+      },1000)
+    });
+  }
+  render() {
+    if (!this.state.isLoad) {
+      return (
+        <View style={styles.loader}>
+          <DotIndicator color="black" />
+        </View>
+      );
+    } else {
+      return (
+        <View>
+          <MapView
+            initialRegion={{
+              latitude: this.state.location.latitude,
+              longitude: this.state.location.longitude,
+              latitudeDelta: 0.0922,
+              longitudeDelta: 0.0421
+            }}
+            style={{
+              width: "90%",
+              height: "60%",
+              marginLeft: "5%",
+              marginRight: "5%",
+              marginTop: "5%"
+            }}
+            showsUserLocation={true}
+          >
+            <Marker
+              coordinate={{
+                latitude: this.state.location.latitude,
+                longitude: this.state.location.longitude
+              }}
+              onPress={() =>
+                this.props.navigation.navigate("Departure", {
+                  location: this.state.location
+                })
+              }
+            />
+          </MapView>
+          <View style={styles.firstRow}>
+            <View style={styles.secondRow}>
+              <Text style={styles.fontStyle}>현재 위치</Text>
+              <Text style={styles.fontStyle}> {this.state.location.name}</Text>
+              <Text style={styles.fontStyle}>반납하시겠습니까??</Text>
+            </View>
+            <View style={styles.secondRow}>
+              <Text style={styles.fontStyle}>이용 누적 시간</Text>
+              <Text style={styles.fontStyle}> {this.state.time}</Text>
+
+            </View>
+            <View style={styles.thirdRow}>
+              <Button
+                title="YES"
+                type="outline"
+                buttonStyle={{marginRight:30,width:100}}
+                onPress={() => this.props.navigation.navigate("Home")}
+              />
+
+              <Button
+                title="NO"
+                type="outline"
+                buttonStyle={{width:100}}
+                onPress={() => this.props.navigation.navigate("Running")}
+              />
+            </View>
+          </View>
+        </View>
+      );
     }
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  loader: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 1,
+    borderColor: "black"
   },
+  firstRow: {
+ 
+    flexDirection: "column"
+  },
+  secondRow: {
+
+    flexDirection: "column",
+    borderWidth: 1,
+    borderColor: "black",
+    alignItems:"center"
+  },
+  thirdRow: {
+  
+    borderWidth: 1,
+    borderColor: "black",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row"
+  },
+  fontStyle:{
+      marginBottom:20,
+      fontSize:15,
+      fontFamily:"sunflower"
+  }
 });
-   
 
 export default ArriveScreen;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {createStackNavigator} from 'react-navigation-stack'
-import {createAppContainer} from 'react-navigation'
+import {createAppContainer,createSwitchNavigator} from 'react-navigation'
 import HomeScreen from './src/screens/HomeScreen'
 import ArriveScreen from "./src/screens/ArriveScreen"
 import DepartureScreen from "./src/screens/DepartureScreen"
@@ -8,21 +8,29 @@ import MapScreen from "./src/screens/MapScreen"
 import LoginScreen from "./src/screens/LoginScreen"
 import SignupScreen from "./src/screens/SignupScreen"
 import RunningScreen from "./src/screens/RunningScreen"
+import {createBottomTabNavigator,BottomTabBar} from "react-navigation-tabs"
+import {createMaterialBottomTabNavigator} from "react-navigation-material-bottom-tabs"
+ const TabBarComponent =props=>(
+  <BottomTabBar {...props}/>
+)
 
 const navigator = createStackNavigator(
   {
     Home:HomeScreen,
     Arrive:ArriveScreen,
     Departure:DepartureScreen,
-    Map:MapScreen,
+    Map:MapScreen, 
     Login:LoginScreen,
     Signup:SignupScreen,
     Running:RunningScreen
   },
   {
+    headerMode:"none",
+    
     initialRouteName:'Home',
     defaultNavigationOptions:{
-      title:'BikeHub'
+      title:'BikeHub',
+      
     }
   }
 )
