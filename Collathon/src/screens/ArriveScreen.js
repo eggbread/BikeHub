@@ -61,7 +61,7 @@ class ArriveScreen extends Component {
       );
     } else {
       return (
-        <View style={{backgroundColor:"#303144"}}>
+        <View style={{backgroundColor:"#303144", width:"100%", height:"100%"}}>
           <MapView
             initialRegion={{
               latitude: this.state.location.latitude,
@@ -105,15 +105,17 @@ class ArriveScreen extends Component {
               <Button
                 title="YES"
                 type="outline" 
-                buttonStyle={{marginRight:30,width:100}}
+                buttonStyle={{marginRight:30,width:100, backgroundColor: "#4EB8CE"}}
                 onPress={() => this.props.navigation.navigate("Home")}
+                titleStyle={{color: "white"}}
               />
 
               <Button
                 title="NO"
                 type="outline"
-                buttonStyle={{width:100}}
+                buttonStyle={{width:100, backgroundColor: "#4EB8CE"}}
                 onPress={() => this.props.navigation.navigate("Running")}
+                titleStyle={{color: "white"}}
               />
             </View>
           </View>
@@ -130,7 +132,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    borderColor: "black"
+    borderColor: "black",
+    backgroundColor: "#222431"
   },
   firstRow: {
  
@@ -154,7 +157,8 @@ const styles = StyleSheet.create({
   fontStyle:{
       marginBottom:20,
       fontSize:15,
-      fontFamily:"sunflower"
+      fontFamily:"sunflower",
+      color:"white"
   }
 });
 

@@ -3,6 +3,7 @@ import { StyleSheet, KeyboardAvoidingView,Image, Text, View, TextInput } from "r
 import DatePicker from "react-native-datepicker";
 import axios from "axios";
 import { Input, Button } from "react-native-elements";
+import Feather from 'react-native-vector-icons/Feather';
 
 class LoginScreen extends Component {
   constructor(props) {
@@ -49,6 +50,11 @@ class LoginScreen extends Component {
               label="name"
               placeholder="이름을 입력해주세요"
               onChangeText={value => this.setState({ name: value })}
+              leftIcon={<Feather
+                name='user-plus'
+                size={24}
+                color='white'
+              />}
             />
           </View>
           <View style={styles.thirdRow}>
@@ -56,6 +62,11 @@ class LoginScreen extends Component {
               label="ID"
               placeholder="아이디를 입력해주세요"
               onChangeText={value => this.setState({ userId: value })}
+              leftIcon={<Feather
+                name='user'
+                size={24}
+                color='white'
+              />}
             />
           </View>
           <View style={styles.thirdRow}>
@@ -63,6 +74,11 @@ class LoginScreen extends Component {
               label="Password"
               placeholder="비밀번호를 입력해주세요"
               onChangeText={value => this.setState({ userPw: value })}
+              leftIcon={<Feather
+                name='lock'
+                size={24}
+                color='white'
+              />}
             />
           </View>
           <View style={styles.thirdRow}>
@@ -80,6 +96,8 @@ class LoginScreen extends Component {
               title="회원가입"
               type="outline"
               onPress={this.sendUserData}
+              buttonStyle={{backgroundColor: "#4EB8CE"}}
+              titleStyle={{color:"white"}}
             />
           </View>
         </View>

@@ -3,7 +3,7 @@ import { StyleSheet, Text, View,KeyboardAvoidingView, Image,  TextInput } from "
 import axios from "axios";
 import {Input,Button} from "react-native-elements"
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Feather from 'react-native-vector-icons/Feather'
+import Feather from 'react-native-vector-icons/Feather';
 class LoginScreen extends Component {
   constructor(props) {
     super(props);
@@ -75,12 +75,14 @@ class LoginScreen extends Component {
           </View>
           <View style={styles.secondRow}>
             <View style={styles.thirdRow}>
-              <Button title="로그인" buttonStyle={{width:100}} type="outline" onPress={this.sendUserData}/>
+              <Button title="로그인" buttonStyle={{width:100, backgroundColor: "#4EB8CE"}} type="outline" onPress={this.sendUserData}
+               titleStyle={{color: "white"}}/>
               <Button
                 title="회원가입"
-                buttonStyle={{width:100,marginLeft:20}}
+                buttonStyle={{width:100,marginLeft:20, backgroundColor: "#4EB8CE"}}
                 type="outline"
                 onPress={() => this.props.navigation.navigate("Signup")}
+                titleStyle={{color: "white"}}
               />
               
             </View>
