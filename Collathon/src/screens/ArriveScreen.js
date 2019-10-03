@@ -13,11 +13,11 @@ class ArriveScreen extends Component {
     this.state = {
       location: this.props.navigation.state.params.location,
       isLoad: false,
-    time:moment().format("LTS")
+      time:moment().format("LTS")
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     navigator.geolocation.getCurrentPosition(async position => {
       // console.log(position)
 
@@ -45,11 +45,11 @@ class ArriveScreen extends Component {
       });
       console.log("setup");
       console.log(this.state.location);
-      setInterval(()=>{
-        this.setState({
-          time:moment().format("LTS")
-        })
-      },1000)
+      // setInterval(()=>{
+      //   this.setState({
+      //     time:moment().format("LTS")
+      //   })
+      // },1000)
     });
   }
   render() {
@@ -61,7 +61,7 @@ class ArriveScreen extends Component {
       );
     } else {
       return (
-        <View>
+        <View style={{backgroundColor:"#303144"}}>
           <MapView
             initialRegion={{
               latitude: this.state.location.latitude,
@@ -104,7 +104,7 @@ class ArriveScreen extends Component {
             <View style={styles.thirdRow}>
               <Button
                 title="YES"
-                type="outline"
+                type="outline" 
                 buttonStyle={{marginRight:30,width:100}}
                 onPress={() => this.props.navigation.navigate("Home")}
               />

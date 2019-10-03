@@ -6,7 +6,7 @@ import org.unimodules.core.interfaces.Package;
 
 import java.util.Arrays;
 import java.util.List;
-
+import com.wix.RNCameraKit.RNCameraKitPackage;
 import expo.loaders.provider.interfaces.AppLoaderPackagesProviderInterface;
 import host.exp.exponent.generated.BasePackageList;
 import okhttp3.OkHttpClient;
@@ -27,6 +27,7 @@ public class MainApplication extends ExpoApplication implements AppLoaderPackage
         // Add your own packages here!
         // TODO: add native modules!
         new RNCameraPackage()
+        new RNCameraKitPackage()
         // Needed for `react-native link`
         // new MainReactPackage()
     );

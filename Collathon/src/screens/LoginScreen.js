@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View, Image,  TextInput } from "react-native";
+import { StyleSheet, Text, View,KeyboardAvoidingView, Image,  TextInput } from "react-native";
 import axios from "axios";
 import {Input,Button} from "react-native-elements"
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -19,21 +19,20 @@ class LoginScreen extends Component {
     } else {
       console.log(this.state)
       axios
-        .post("http://192.168.0.4:8090/user/login", {
+        .post("http://192.168.0.2:8090/user/login", {
           userId: this.state.userId,
           userPw: this.state.userPw
         })
         .then(res => {
           if(res.status===200){
-            console.log(this.props)
-            this.props.navigation.navigate("Home",{isLogin:res.data.message}) 
+            this.props.navigation.navigate("Home",{isLogin:res.data.data}) 
           }
         });
     } 
   };
   render() {
     return (
-      <View style={{ width: "100%", height: "100%" }}>
+      <KeyboardAvoidingView style={{ width: "100%", height: "100%",backgroundColor:"#303144" }} behavior="height" enabled>
         <View style={styles.logo}>
           <Image
             source={require("../../assets/logo.png")}
@@ -53,10 +52,10 @@ class LoginScreen extends Component {
                 placeholder="아이디를 입력해주세요"
                 onChangeText={value => this.setState({ userId: value })}
                 label="ID"
-                leftIcon={<Icon
-                  name='user-o'
+                leftIcon={<Feather
+                  name='user'
                   size={24}
-                  color='black'
+                  color='white'
                 />}
               />
               </View>
@@ -69,7 +68,7 @@ class LoginScreen extends Component {
                 leftIcon={<Feather
                   name='lock'
                   size={24}
-                  color='black'
+                  color='white'
                 />}
                 />
                 </View>
@@ -88,7 +87,7 @@ class LoginScreen extends Component {
             <View style={styles.thirdRow}></View>
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }
@@ -101,7 +100,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderWidth: 1,
     borderColor: "black",
-    height: "50%"
+    height: "50%",
+   
   },
   firstRow: {
     flex: 1,

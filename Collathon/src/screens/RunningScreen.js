@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-import { PacmanIndicator } from "react-native-indicators";
+// import { PacmanIndicator } from "react-native-indicators";
 
 class RunningScreen extends Component {
   constructor(props) {
@@ -10,7 +10,7 @@ class RunningScreen extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <PacmanIndicator color="black" />
+        {/* <PacmanIndicator color="black" /> */}
         <Text>현재 이용중입니다!</Text>
         <Button
           title="End"

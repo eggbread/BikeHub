@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, Image, Text, View, TextInput } from "react-native";
+import { StyleSheet, KeyboardAvoidingView,Image, Text, View, TextInput } from "react-native";
 import DatePicker from "react-native-datepicker";
 import axios from "axios";
 import { Input, Button } from "react-native-elements";
@@ -31,7 +31,7 @@ class LoginScreen extends Component {
   };
   render() {
     return (
-      <View style={{ width: "100%", height: "100%" }}>
+      <KeyboardAvoidingView style={{ width: "100%", height: "100%",backgroundColor:"#303144" }} behavior="height" enabled>
         <View style={styles.logo}>
           <Image
             source={require("../../assets/logo.png")}
@@ -83,7 +83,7 @@ class LoginScreen extends Component {
             />
           </View>
         </View>
-      </View>
+      </KeyboardAvoidingView>
     );
   }
 }

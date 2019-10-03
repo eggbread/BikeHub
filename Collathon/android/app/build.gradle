@@ -34,7 +34,7 @@ android {
     targetSdkVersion safeExtGet("targetSdkVersion", 28)
     versionCode 1
     versionName '1.0.0'
-missingDimensionStrategy 'react-native-camera', 'mlkit'
+missingDimensionStrategy 'react-native-camera', 'general'
     multiDexEnabled true
     testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     // Deprecated. Used by net.openid:appauth
@@ -103,6 +103,7 @@ apply from: 'expo.gradle'
 apply from: "../../node_modules/react-native-unimodules/gradle.groovy"
 
 dependencies {
+  compile project(":rncamerakit")
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation project(':react-native-camera')
   implementation 'com.android.support:multidex:1.0.1'
